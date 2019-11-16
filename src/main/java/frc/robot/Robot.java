@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -39,7 +40,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-
+    
   }
 
   @Override
@@ -63,12 +64,15 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-
+    
   }
 
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    //double throttle = (1.0 - Robot.oi.LEFT_JOY.getThrottle())/-2.0;
+
+    Robot.drivebase.set(ControlMode.PercentOutput, Robot.oi.getLeftJoyY(), Robot.oi.getRightJoyY());
   }
 
   @Override

@@ -21,23 +21,22 @@ import frc.robot.commands.TankDrive;
  */
 public class Drivebase extends Subsystem{
     private TalonSRX LeftMotor;
-    private TalonSRX LeftMotorFollower;
+    //private TalonSRX LeftMotorFollower;
     private TalonSRX RightMotor;
-    private TalonSRX RightMotorFollower;
+    //private TalonSRX RightMotorFollower;
 
     public Drivebase() {
         LeftMotor = new TalonSRX(RobotMap.LEFT_MOTOR.value);
         RightMotor = new TalonSRX(RobotMap.RIGHT_MOTOR.value);
-        LeftMotorFollower = new TalonSRX(RobotMap.LEFT_FOLLOW_MOTOR.value);
-        RightMotorFollower = new TalonSRX(RobotMap.RIGHT_FOLLOW_MOTOR.value);
-
+        //RightMotorFollower = new TalonSRX(RobotMap.RIGHT_FOLLOW_MOTOR.value);
+        //LeftMotorFollower = new Talon
         Robot.initTalon(LeftMotor);
         Robot.initTalon(RightMotor);
-        Robot.initTalon(LeftMotorFollower);
-        Robot.initTalon(RightMotorFollower);
+        //Robot.initTalon(LeftMotorFollower);
+        //Robot.initTalon(RightMotorFollower);
 
-        LeftMotorFollower.follow(LeftMotor);
-        RightMotorFollower.follow(RightMotor);
+        //LeftMotorFollower.follow(LeftMotor);
+        //RightMotorFollower.follow(RightMotor);
 
         RightMotor.setInverted(true);
 
@@ -49,6 +48,6 @@ public class Drivebase extends Subsystem{
     }
 
     protected void initDefaultCommand() {
-        setDefaultCommand(new TankDrive());
+        //setDefaultCommand(new TankDrive());
     }
 }
