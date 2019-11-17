@@ -13,12 +13,14 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.Drivebase;
 
 /**
@@ -29,11 +31,15 @@ import frc.robot.subsystems.Drivebase;
  * project.
  */
 public class Robot extends TimedRobot {
+  private Compressor compressor;
   public static OI oi;
   public static Drivebase drivebase;
 
   @Override
   public void robotInit() {
+    compressor = new Compressor(RobotMap.PCM.value);
+    compressor.setClosedLoopControl(true);
+    compressor.start();
     oi = new OI();
     drivebase = new Drivebase();
   }
@@ -64,7 +70,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    
+    new TankDrive().start();
   }
 
   @Override
@@ -72,7 +78,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     //double throttle = (1.0 - Robot.oi.LEFT_JOY.getThrottle())/-2.0;
 
-    Robot.drivebase.setIntake(ControlMode.PercentOutput, Robot.oi.getLeftJoyY(), Robot.oi.getRightJoyY());
+    //Robot.drivebase.setIntake(ControlMode.PercentOutput, Robot.oi.getLeftJoyY(), Robot.oi.getRightJoyY());
   }
 
   @Override

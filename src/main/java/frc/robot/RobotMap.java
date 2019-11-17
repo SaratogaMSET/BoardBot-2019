@@ -25,7 +25,10 @@ public enum RobotMap {
 
   //CONTROL MAPPINGS
   LEFT_JOYSTICK(2),
-  RIGHT_JOYSTICK(4);
+  RIGHT_JOYSTICK(4),
+
+  PCM(0),
+  SOLENOID(0);
 
   public final int value;
 

@@ -41,6 +41,10 @@ public class OI {
     return Math.abs(raw) < JOY_DEADZONE ? 0.0 : raw;
   }
 
+  public boolean getRightJoyTrigger() {
+    boolean raw = RIGHT_JOY.getRawButton(1);
+    return raw;
+  }
   public OI(){
 
   }
