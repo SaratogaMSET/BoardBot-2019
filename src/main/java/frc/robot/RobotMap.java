@@ -16,8 +16,10 @@ package frc.robot;
 public enum RobotMap {
 
   //MOTORS
-  LEFT_MOTOR(34),
-  RIGHT_MOTOR(40),
+  LEFT_INTAKE(8),
+  RIGHT_INTAKE(9),
+  CARGO_DEPLOY(13),
+  INTAKE_MOTOR(22),
   //LEFT_FOLLOW_MOTOR(2),
   //RIGHT_FOLLOW_MOTOR(3),
 

@@ -72,7 +72,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     //double throttle = (1.0 - Robot.oi.LEFT_JOY.getThrottle())/-2.0;
 
-    Robot.drivebase.set(ControlMode.PercentOutput, Robot.oi.getLeftJoyY(), Robot.oi.getRightJoyY());
+    Robot.drivebase.setIntake(ControlMode.PercentOutput, Robot.oi.getLeftJoyY(), Robot.oi.getRightJoyY());
   }
 
   @Override

@@ -24,14 +24,20 @@ public class Drivebase extends Subsystem{
     //private TalonSRX LeftMotorFollower;
     private TalonSRX RightMotor;
     //private TalonSRX RightMotorFollower;
+    private TalonSRX CargoDeploy;
+    private TalonSRX IntakeMotor;
 
     public Drivebase() {
-        LeftMotor = new TalonSRX(RobotMap.LEFT_MOTOR.value);
-        RightMotor = new TalonSRX(RobotMap.RIGHT_MOTOR.value);
+        LeftMotor = new TalonSRX(RobotMap.LEFT_INTAKE.value);
+        RightMotor = new TalonSRX(RobotMap.RIGHT_INTAKE.value);
+        CargoDeploy = new TalonSRX(RobotMap.CARGO_DEPLOY.value);
+        IntakeMotor = new TalonSRX(RobotMap.INTAKE_MOTOR.value);
         //RightMotorFollower = new TalonSRX(RobotMap.RIGHT_FOLLOW_MOTOR.value);
         //LeftMotorFollower = new Talon
         Robot.initTalon(LeftMotor);
         Robot.initTalon(RightMotor);
+        Robot.initTalon(CargoDeploy);
+        Robot.initTalon(IntakeMotor);
         //Robot.initTalon(LeftMotorFollower);
         //Robot.initTalon(RightMotorFollower);
 
@@ -39,12 +45,16 @@ public class Drivebase extends Subsystem{
         //RightMotorFollower.follow(RightMotor);
 
         RightMotor.setInverted(true);
+        IntakeMotor.setInverted(true);
 
     }
 
-    public void set( ControlMode mode, double leftvalue, double rightvalue){
-        LeftMotor.set(mode, leftvalue);
-        RightMotor.set(mode, rightvalue);
+    public void setIntake( ControlMode mode, double leftValue, double rightValue){
+        LeftMotor.set(mode, leftValue);
+        RightMotor.set(mode, leftValue);
+        CargoDeploy.set(mode, leftValue);
+        // IntakeMotor.set(mode, leftValue);
+        IntakeMotor.set(mode, rightValue);
     }
 
     protected void initDefaultCommand() {
