@@ -15,10 +15,10 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class TankDrive extends Command{
+public class ExecuteSubsystems extends Command{
 
-    public TankDrive(){
-        requires(Robot.drivebase);
+    public ExecuteSubsystems(){
+        requires(Robot.intake);
     }
 
     protected void initialized(){
@@ -26,10 +26,11 @@ public class TankDrive extends Command{
     }
 
     protected void execute() {
-        double throttle = (1.0 - Robot.oi.LEFT_JOY.getThrottle())/-2.0;
-        // throttle*=0.1;
 
-        Robot.drivebase.setIntake(ControlMode.PercentOutput, Robot.oi.getLeftJoyY()*throttle, Robot.oi.getRightJoyY()*throttle, Robot.oi.getRightJoyTrigger());
+        //This sets the values for the Intake motors using the joysticks
+        double throttleLeft = (1.0 - Robot.oi.LEFT_JOY.getThrottle())/-2.0;
+        double throttleRight = (1.0 - Robot.oi.RIGHT_JOY.getThrottle())/-2.0;
+        Robot.intake.setIntakeVals(ControlMode.PercentOutput, Robot.oi.getLeftJoyY()*throttleLeft, Robot.oi.getRightJoyY()*throttleRight, Robot.oi.getRightJoyTrigger());
     }
     protected boolean isFinished(){
         return false;

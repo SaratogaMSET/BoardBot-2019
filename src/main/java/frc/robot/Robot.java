@@ -20,8 +20,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.TankDrive;
-import frc.robot.subsystems.Drivebase;
+import frc.robot.commands.ExecuteSubsystems;
+import frc.robot.subsystems.Intake;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,7 +33,7 @@ import frc.robot.subsystems.Drivebase;
 public class Robot extends TimedRobot {
   private Compressor compressor;
   public static OI oi;
-  public static Drivebase drivebase;
+  public static Intake intake;
 
   @Override
   public void robotInit() {
@@ -41,7 +41,7 @@ public class Robot extends TimedRobot {
     compressor.setClosedLoopControl(true);
     compressor.start();
     oi = new OI();
-    drivebase = new Drivebase();
+    intake = new Intake();
   }
 
   @Override
@@ -70,7 +70,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    new TankDrive().start();
+    new ExecuteSubsystems().start();
   }
 
   @Override
