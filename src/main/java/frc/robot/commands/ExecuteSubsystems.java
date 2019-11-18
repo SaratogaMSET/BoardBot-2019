@@ -32,7 +32,13 @@ public class ExecuteSubsystems extends Command{
         //This sets the values for the Intake motors using the joysticks
         double throttleLeft = (1.0 - Robot.oi.LEFT_JOY.getThrottle())/-2.0;
         double throttleRight = (1.0 - Robot.oi.RIGHT_JOY.getThrottle())/-2.0;
-        Robot.intake.setIntakeVals(ControlMode.PercentOutput, Robot.oi.getLeftJoyY()*throttleLeft, Robot.oi.getRightJoyY()*throttleRight, Robot.oi.getRightJoyTrigger());
+        Robot.intake.setIntakeVals(
+            ControlMode.PercentOutput,
+            Robot.oi.getLeftJoyY()*throttleLeft,
+            Robot.oi.getRightJoyY()*throttleRight,
+            Robot.oi.getRightJoyButtons(5),
+            Robot.oi.getRightJoyButtons(3)
+        );
     }
     protected boolean isFinished(){
         return false;

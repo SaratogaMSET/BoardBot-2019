@@ -53,13 +53,30 @@ public class Intake extends Subsystem{
 
     }
 
-    public void setIntakeVals( ControlMode mode, double leftValue, double rightValue, boolean intakeSolenoidValue){
-        leftMotor.set(mode, leftValue);
-        rightMotor.set(mode, leftValue);
-        cargoDeploy.set(mode, leftValue);
-        // IntakeMotor.set(mode, leftValue);
-        intakeMotor.set(mode, rightValue);
-        intakeSolenoid.set(intakeSolenoidValue);
+    public void setIntakeVals( ControlMode mode, double leftValue, double rightValue, boolean isIntakePressed, boolean isOuttakePressed){
+        if(isIntakePressed){
+            leftMotor.set(mode, 0.5);
+            rightMotor.set(mode, 0.5);
+            cargoDeploy.set(mode, 0.5);
+            // IntakeMotor.set(mode, leftValue);
+            intakeMotor.set(mode, 1);
+            intakeSolenoid.set(true);
+        } else if(isOuttakePressed){
+            leftMotor.set(mode, -0.5);
+            rightMotor.set(mode, -0.5);
+            cargoDeploy.set(mode, -0.5);
+            // IntakeMotor.set(mode, leftValue);
+            intakeMotor.set(mode, 0);
+            intakeSolenoid.set(true);
+        } else {
+            leftMotor.set(mode, 0);
+            rightMotor.set(mode, 0);
+            cargoDeploy.set(mode, 0);
+            // IntakeMotor.set(mode, leftValue);
+            intakeMotor.set(mode, 0);
+            intakeSolenoid.set(false);
+        }
+        
     }
 
     protected void initDefaultCommand() {
