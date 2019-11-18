@@ -19,6 +19,7 @@ public class ExecuteSubsystems extends Command{
 
     public ExecuteSubsystems(){
         requires(Robot.intake);
+        requires(Robot.drivetrain);
     }
 
     protected void initialized(){
@@ -26,6 +27,7 @@ public class ExecuteSubsystems extends Command{
     }
 
     protected void execute() {
+        //This sets the values for the arcade Drivetrain
 
         //This sets the values for the Intake motors using the joysticks
         double throttleLeft = (1.0 - Robot.oi.LEFT_JOY.getThrottle())/-2.0;

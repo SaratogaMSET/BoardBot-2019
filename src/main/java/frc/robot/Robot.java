@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExecuteSubsystems;
+import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 
 /**
@@ -34,6 +35,7 @@ public class Robot extends TimedRobot {
   private Compressor compressor;
   public static OI oi;
   public static Intake intake;
+  public static Drivetrain drivetrain;
 
   @Override
   public void robotInit() {
@@ -42,6 +44,7 @@ public class Robot extends TimedRobot {
     compressor.start();
     oi = new OI();
     intake = new Intake();
+    drivetrain = new Drivetrain();
   }
 
   @Override
