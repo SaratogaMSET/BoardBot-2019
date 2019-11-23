@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.DrivetrainTest;
 import frc.robot.commands.ExecuteSubsystems;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
@@ -73,7 +74,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    new ExecuteSubsystems().start();
+    new DrivetrainTest().start();
   }
 
   @Override
