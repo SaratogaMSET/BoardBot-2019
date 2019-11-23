@@ -26,9 +26,9 @@ public class DrivetrainTest extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double throttleLeft = -0.5;
     Robot.drivetrain.drivetrainVals(
-        Robot.oi.getLeftJoyY() * throttleLeft
+        Robot.oi.getLeftJoyY() * -0.3,
+        Robot.oi.getRightJoyX() * 0.05
     );
   }
 

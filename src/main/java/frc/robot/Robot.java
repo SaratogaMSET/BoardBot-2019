@@ -74,7 +74,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    new DrivetrainTest().start();
+    new ExecuteSubsystems().start();
   }
 
   @Override

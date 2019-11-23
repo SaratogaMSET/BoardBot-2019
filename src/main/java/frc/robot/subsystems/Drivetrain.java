@@ -14,6 +14,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.*;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.ExecuteSubsystems;
@@ -32,8 +33,13 @@ public class Drivetrain extends Subsystem{
         //Initialize the SPARK vars
         MotorL1 = new CANSparkMax(RobotMap.DRIVETRAIN_L1.value, MotorType.kBrushless);
         MotorL2 = new CANSparkMax(RobotMap.DRIVETRAIN_L2.value, MotorType.kBrushless);
+        //SpeedControllerGroup L = new SpeedControllerGroup(MotorL1, MotorL2);
+
         MotorR1 = new CANSparkMax(RobotMap.DRIVETRAIN_R1.value, MotorType.kBrushless);
         MotorR2 = new CANSparkMax(RobotMap.DRIVETRAIN_R2.value, MotorType.kBrushless);
+        //SpeedControllerGroup R = new SpeedControllerGroup(MotorR1, MotorR2);
+
+        //DifferentialDrive drive = new DifferentialDrive(L, R);
 
         MotorL1.clearFaults();
         MotorL2.clearFaults();
@@ -47,11 +53,18 @@ public class Drivetrain extends Subsystem{
 
     }
 
-    public void drivetrainVals(double leftValue){
-        MotorL1.set(leftValue);
-        MotorL2.set(leftValue);
-        MotorR1.set(leftValue);
-        MotorR2.set(leftValue);
+    public void drivetrainVals(double leftValue, double rightValue){
+        MotorL1.set(leftValue - rightValue);
+        MotorL2.set(leftValue - rightValue);
+        MotorR1.set(leftValue + rightValue);
+        MotorR2.set(leftValue + rightValue);
+    }
+
+    public void arcadeTest(double rightValue){
+        MotorL1.set(rightValue);
+        MotorL2.set(rightValue);
+        MotorR1.set(-rightValue);
+        MotorR2.set(-rightValue);
     }
 
     protected void initDefaultCommand() {

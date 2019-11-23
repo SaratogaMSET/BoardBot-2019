@@ -30,15 +30,24 @@ public class ExecuteSubsystems extends Command{
         //This sets the values for the arcade Drivetrain
 
         //This sets the values for the Intake motors using the joysticks
-        double throttleLeft = (1.0 - Robot.oi.LEFT_JOY.getThrottle())/-2.0;
-        double throttleRight = (1.0 - Robot.oi.RIGHT_JOY.getThrottle())/-2.0;
+
+        //.arcadeDrive(Robot.oi.getLeftJoyY(), Robot.oi.getRightJoyX());
+
         Robot.intake.setIntakeVals(
             ControlMode.PercentOutput,
-            Robot.oi.getLeftJoyY()*throttleLeft,
-            Robot.oi.getRightJoyY()*throttleRight,
             Robot.oi.getRightJoyButtons(5),
             Robot.oi.getRightJoyButtons(3)
         );
+        
+        Robot.drivetrain.drivetrainVals(
+            Robot.oi.getLeftJoyY() * -0.5,
+            Robot.oi.getRightJoyX() * -0.3
+        );
+        /*
+        Robot.drivetrain.arcadeTest(
+            Robot.oi.getRightJoyX() * throttleLeft
+        );
+        */
     }
     protected boolean isFinished(){
         return false;
