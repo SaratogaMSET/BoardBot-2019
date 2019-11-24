@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DrivetrainTest;
 import frc.robot.commands.ExecuteSubsystems;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.GyroSubsystem;
 import frc.robot.subsystems.Intake;
 
 /**
@@ -37,6 +38,7 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static Intake intake;
   public static Drivetrain drivetrain;
+  public static GyroSubsystem gyro;
 
   @Override
   public void robotInit() {
@@ -46,6 +48,7 @@ public class Robot extends TimedRobot {
     oi = new OI();
     intake = new Intake();
     drivetrain = new Drivetrain();
+    gyro = new GyroSubsystem();
   }
 
   @Override
@@ -74,6 +77,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    gyro.reset();
     new ExecuteSubsystems().start();
   }
 

@@ -50,6 +50,11 @@ public class OI {
     boolean raw = RIGHT_JOY.getRawButton(buttonNum);
     return raw;
   }
+
+  public boolean getLeftJoyButtons(int buttonNum) {
+    boolean raw = LEFT_JOY.getRawButton(buttonNum);
+    return raw;
+  }
   public OI(){
 
   }

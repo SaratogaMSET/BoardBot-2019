@@ -10,6 +10,7 @@ package frc.robot.commands;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 /**
@@ -20,6 +21,7 @@ public class ExecuteSubsystems extends Command{
     public ExecuteSubsystems(){
         requires(Robot.intake);
         requires(Robot.drivetrain);
+        requires(Robot.gyro);
     }
 
     protected void initialized(){
@@ -33,21 +35,26 @@ public class ExecuteSubsystems extends Command{
 
         //.arcadeDrive(Robot.oi.getLeftJoyY(), Robot.oi.getRightJoyX());
 
+
+
         Robot.intake.setIntakeVals(
             ControlMode.PercentOutput,
-            Robot.oi.getRightJoyButtons(5),
-            Robot.oi.getRightJoyButtons(3)
+            Robot.oi.getLeftJoyButtons(1),
+            Robot.oi.getRightJoyButtons(1)
         );
         
         Robot.drivetrain.drivetrainVals(
-            Robot.oi.getLeftJoyY() * -0.5,
-            Robot.oi.getRightJoyX() * -0.3
+            Math.abs(Robot.oi.getLeftJoyY()) > 0.2 ? Robot.oi.getLeftJoyY() * -0.5 : 0,
+            Math.abs(Robot.oi.getRightJoyX()) > 0.2 ? Robot.oi.getRightJoyX() * -0.3 : 0,
+            Robot.gyro.getYaw()
         );
+
         /*
         Robot.drivetrain.arcadeTest(
             Robot.oi.getRightJoyX() * throttleLeft
         );
         */
+        SmartDashboard.putNumber("Heading", Robot.gyro.getYaw());
     }
     protected boolean isFinished(){
         return false;

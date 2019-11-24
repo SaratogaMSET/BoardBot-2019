@@ -28,6 +28,7 @@ public class Drivetrain extends Subsystem{
     private CANSparkMax MotorL2;
     private CANSparkMax MotorR1;
     private CANSparkMax MotorR2;
+    private double stayAt = 0;
 
     public Drivetrain() {
         //Initialize the SPARK vars
@@ -53,11 +54,25 @@ public class Drivetrain extends Subsystem{
 
     }
 
-    public void drivetrainVals(double leftValue, double rightValue){
-        MotorL1.set(leftValue - rightValue);
-        MotorL2.set(leftValue - rightValue);
-        MotorR1.set(leftValue + rightValue);
-        MotorR2.set(leftValue + rightValue);
+    public void drivetrainVals(double leftValue, double rightValue, double veerVal){
+        double gainL = 0, gainR = 0;
+        if(rightValue == 0 && leftValue > 0){
+            if(veerVal < stayAt-3){
+                gainL = -veerVal;
+            }
+            if(veerVal > stayAt+3){
+                gainR = -veerVal;
+            }
+        }
+        stayAt = veerVal;
+        // if(leftValue == 0){
+        //     Robot.gyro.reset();
+        // }
+        // if()
+        MotorL1.set(leftValue - rightValue + gainL);
+        MotorL2.set(leftValue - rightValue + gainL);
+        MotorR1.set(leftValue + rightValue + gainR);
+        MotorR2.set(leftValue + rightValue + gainR);  
     }
 
     public void arcadeTest(double rightValue){

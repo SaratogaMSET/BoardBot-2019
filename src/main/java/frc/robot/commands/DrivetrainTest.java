@@ -26,10 +26,10 @@ public class DrivetrainTest extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.drivetrain.drivetrainVals(
+    /*Robot.drivetrain.drivetrainVals(
         Robot.oi.getLeftJoyY() * -0.3,
         Robot.oi.getRightJoyX() * 0.05
-    );
+    );*/
   }
 
   // Make this return true when this Command no longer needs to run execute()
