@@ -55,20 +55,21 @@ public class Drivetrain extends Subsystem{
     }
 
     public void drivetrainVals(double leftValue, double rightValue, double veerVal){
-        double gainL = 0, gainR = 0;
+        double gainL = 0;
+        double gainR = 0;
         if(rightValue == 0 && leftValue > 0){
-            if(veerVal < stayAt-3){
+            if(veerVal < stayAt-0.5){
                 gainL = -veerVal;
             }
-            if(veerVal > stayAt+3){
+            if(veerVal > stayAt+0.5){
                 gainR = -veerVal;
             }
         }
         stayAt = veerVal;
-        // if(leftValue == 0){
-        //     Robot.gyro.reset();
-        // }
-        // if()
+        if(leftValue == 0){
+            Robot.gyro.reset();
+        }
+        
         MotorL1.set(leftValue - rightValue + gainL);
         MotorL2.set(leftValue - rightValue + gainL);
         MotorR1.set(leftValue + rightValue + gainR);
