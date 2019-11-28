@@ -15,6 +15,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.*;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.ExecuteSubsystems;
@@ -55,9 +56,14 @@ public class Drivetrain extends Subsystem{
     }
 
     public void drivetrainVals(double leftValue, double rightValue, double veerVal){
+        
+        // SmartDashboard.putNumber("VEERVAL", veerVal);  
+        // SmartDashboard.putNumber("LeftValue", leftValue);
+        // SmartDashboard.putNumber("RightValue", rightValue);    
+        SmartDashboard.putNumber("Total Veer", veerVal-stayAt);  
         double gainL = 0;
         double gainR = 0;
-        if(rightValue == 0 && leftValue > 0){
+        if(rightValue == 0 && leftValue != 0){
             if(veerVal < stayAt-0.5){
                 gainL = -veerVal;
             }
