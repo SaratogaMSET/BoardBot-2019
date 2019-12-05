@@ -29,7 +29,9 @@ public class Drivetrain extends Subsystem{
     private CANSparkMax MotorL2;
     private CANSparkMax MotorR1;
     private CANSparkMax MotorR2;
+    Encoder enc;
     private double stayAt = 0;
+    private double K = 25.0/0.1;
 
     public Drivetrain() {
         //Initialize the SPARK vars
@@ -65,11 +67,15 @@ public class Drivetrain extends Subsystem{
         double gainR = 0;
         if(rightValue == 0 && leftValue != 0){
             if(veerVal < stayAt-0.5){
-                gainL = -veerVal;
+                gainL = -veerVal/K;
+                gainR = veerVal/K;
             }
             if(veerVal > stayAt+0.5){
-                gainR = -veerVal;
+                gainR = -veerVal/K;
+                gainL = veerVal/K;
             }
+            gainR /= Math.max(gainR, gainL);
+            gainL /= Math.max(gainR, gainL);
         }
         stayAt = veerVal;
         if(leftValue == 0){
