@@ -31,7 +31,8 @@ public class Drivetrain extends Subsystem{
     private CANSparkMax MotorR2;
     Encoder enc;
     private double stayAt = 0;
-    private double K = 25.0/0.1;
+    private double K = 50.0/0.1;
+    private double D = 0.1;
 
     public Drivetrain() {
         //Initialize the SPARK vars
@@ -63,29 +64,36 @@ public class Drivetrain extends Subsystem{
         // SmartDashboard.putNumber("LeftValue", leftValue);
         // SmartDashboard.putNumber("RightValue", rightValue);    
         SmartDashboard.putNumber("Total Veer", veerVal-stayAt);  
+       
+       // if we have just finished turning: stayAt = veerVal;
+       
         double gainL = 0;
         double gainR = 0;
         if(rightValue == 0 && leftValue != 0){
-            if(veerVal < stayAt-0.5){
-                gainL = -veerVal/K;
-                gainR = veerVal/K;
+            
+            if(veerVal < stayAt-0.2){
+                gainL = -veerVal/K*D;
+                gainR = veerVal/K*D;
             }
-            if(veerVal > stayAt+0.5){
-                gainR = -veerVal/K;
-                gainL = veerVal/K;
+            if(veerVal > stayAt+0.2){
+                gainR = -veerVal/K*D;
+                gainL = veerVal/K*D;
             }
-            gainR /= Math.max(gainR, gainL);
-            gainL /= Math.max(gainR, gainL);
         }
-        stayAt = veerVal;
-        if(leftValue == 0){
-            Robot.gyro.reset();
-        }
+        
+        // if(rightValue != 0){
+        //     Robot.gyro.reset();
+        //     stayAt = veerVal;
+        // }
         
         MotorL1.set(leftValue - rightValue + gainL);
         MotorL2.set(leftValue - rightValue + gainL);
         MotorR1.set(leftValue + rightValue + gainR);
         MotorR2.set(leftValue + rightValue + gainR);  
+        // MotorL1.set(leftValue);
+        // MotorL2.set(leftValue);
+        // MotorR1.set(rightValue);
+        // MotorR2.set(rightValue);
     }
 
     public void arcadeTest(double rightValue){
