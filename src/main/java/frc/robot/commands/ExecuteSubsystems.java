@@ -23,6 +23,7 @@ public class ExecuteSubsystems extends Command{
         requires(Robot.intake);
         requires(Robot.drivetrain);
         requires(Robot.gyro);
+        requires(Robot.turnTest);
     }
 
     protected void initialized(){
@@ -46,6 +47,10 @@ public class ExecuteSubsystems extends Command{
             Math.abs(Robot.oi.getLeftJoyY()) > 0.2 ? Robot.oi.getLeftJoyY() * -0.5 : 0,
             Math.abs(Robot.oi.getRightJoyX()) > 0.2 ? Robot.oi.getRightJoyX() * -0.3 : 0,
             Robot.gyro.getYaw()
+        );
+
+        Robot.turnTest.buttonPressed(
+            Robot.oi.getLeftJoyButtons(2)
         );
 
         /*

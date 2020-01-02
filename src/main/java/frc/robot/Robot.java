@@ -22,9 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DrivetrainTest;
 import frc.robot.commands.ExecuteSubsystems;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.GyroSubsystem;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -37,6 +35,7 @@ public class Robot extends TimedRobot {
   private Compressor compressor;
   public static OI oi;
   public static Intake intake;
+  public static Turn90Test turnTest;
   public static Drivetrain drivetrain;
   public static GyroSubsystem gyro;
 
@@ -49,6 +48,7 @@ public class Robot extends TimedRobot {
     intake = new Intake();
     drivetrain = new Drivetrain();
     gyro = new GyroSubsystem();
+    turnTest = new Turn90Test();
   }
 
   @Override

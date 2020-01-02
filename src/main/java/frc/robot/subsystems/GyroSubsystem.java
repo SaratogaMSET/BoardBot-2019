@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -19,10 +20,17 @@ public class GyroSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   private AHRS gyro;
+  public Double gyroPIDOutput;
+  public PIDController gyroPIDController;
 
   public GyroSubsystem() {
+    gyroPIDOutput = 0.0;
     gyro = new AHRS(SPI.Port.kMXP);
     gyro.reset();
+  }
+
+  public double getGyroPIDOutput() {
+    return gyroPIDOutput;
   }
 
   public double getYaw() {
