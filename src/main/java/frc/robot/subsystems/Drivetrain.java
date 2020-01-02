@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.ExecuteSubsystems;
+import frc.robot.commands.GyroPIDCommand;
 
 
 /**
@@ -31,6 +32,7 @@ public class Drivetrain extends Subsystem{
     private CANSparkMax MotorR1;
     private CANSparkMax MotorR2;
     Encoder enc;
+    private GyroSubsystem gyro;
     private double stayAt = 0;
     private double K = 50.0/0.1;
     private double D = 0.1;
@@ -55,6 +57,8 @@ public class Drivetrain extends Subsystem{
         MotorR1.setInverted(true);
         MotorR2.setInverted(true);
 
+        gyro = new GyroSubsystem();
+
 
 
     }
@@ -75,28 +79,37 @@ public class Drivetrain extends Subsystem{
        
         double gainL = 0;
         double gainR = 0;
+        stayAt = gyro.getYaw();
+        GyroPIDCommand gyroPID;
         if(rightValue == 0 && leftValue != 0){
-            
-            if(veerVal < stayAt-0.2){
-                gainL = -veerVal/K*D;
-                gainR = veerVal/K*D;
-            }
-            if(veerVal > stayAt+0.2){
-                gainR = -veerVal/K*D;
-                gainL = veerVal/K*D;
-            }
 
-        }
+            final double gyroVal = stayAt;
+            final double turnAngle = 0;
+            final double timeoutSec = 10;
+            final double speed = leftValue;
+            gyroPID = new GyroPIDCommand(gyroVal + turnAngle, timeoutSec, speed);
+            gyroPID.start();
+            // if(veerVal < stayAt-0.2){
+            //     gainL = -veerVal/K*D;
+            //     gainR = veerVal/K*D;
+            // }
+            // if(veerVal > stayAt+0.2){
+            //     gainR = -veerVal/K*D;
+            //     gainL = veerVal/K*D;
+            // }
+
+        } else {
         
-        if(rightValue != 0){
-            Robot.gyro.reset();
-            stayAt = veerVal;
-        }
-        
-        MotorL1.set(leftValue - rightValue + gainL);
-        MotorL2.set(leftValue - rightValue + gainL);
-        MotorR1.set(leftValue + rightValue + gainR);
-        MotorR2.set(leftValue + rightValue + gainR);  
+        // if(rightValue != 0){
+        //     Robot.gyro.reset();
+        //     stayAt = veerVal;
+        // }
+            
+            MotorL1.set(leftValue - rightValue);
+            MotorL2.set(leftValue - rightValue);
+            MotorR1.set(leftValue + rightValue);
+            MotorR2.set(leftValue + rightValue);
+        }  
         // MotorL1.set(leftValue);
         // MotorL2.set(leftValue);
         // MotorR1.set(rightValue);

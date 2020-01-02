@@ -55,8 +55,9 @@ public class Turn90Test extends Subsystem{
         final double gyroVal = Robot.gyro.getYaw();
         final double turnAngle = 90;
         final double timeoutSec = 10;
+        final double speed = 0;
         if(buttonPressed){
-            new GyroPIDCommand(gyroVal + turnAngle, timeoutSec).start();
+            new GyroPIDCommand(gyroVal + turnAngle, timeoutSec, speed).start();
         }
         
     }

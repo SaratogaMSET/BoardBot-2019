@@ -23,7 +23,7 @@ public class ExecuteSubsystems extends Command{
         requires(Robot.intake);
         requires(Robot.drivetrain);
         requires(Robot.gyro);
-        requires(Robot.turnTest);
+        //requires(Robot.turnTest);
     }
 
     protected void initialized(){

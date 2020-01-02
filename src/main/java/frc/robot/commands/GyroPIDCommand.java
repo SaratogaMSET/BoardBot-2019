@@ -24,16 +24,18 @@ public class GyroPIDCommand extends Command {
   Timer time;
   Double onTargetTime;
   double timeout;
+  double speed;
 
   double targetAngle;
 
   AdvancedPIDController pidController;
 
-  public GyroPIDCommand(double targetAngle, double timeout) {
+  public GyroPIDCommand(double targetAngle, double timeout, double speed) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     this.targetAngle = targetAngle;
     this.timeout = timeout;
+    this.speed = speed;
   }
 
   // Called just before this Command runs the first time
@@ -81,7 +83,7 @@ public class GyroPIDCommand extends Command {
      SmartDashboard.putNumber("Gyro PID ERROR", pidController.getError());
      SmartDashboard.putBoolean("Gyro PID ONTARGET", pidController.onTarget());
      SmartDashboard.putNumber("Gyro PID OUTPUT", Robot.gyro.gyroPIDOutput);
-    Robot.drivetrain.rawDrive(Robot.gyro.getGyroPIDOutput(), -Robot.gyro.getGyroPIDOutput());
+    Robot.drivetrain.rawDrive(Robot.gyro.getGyroPIDOutput()+speed, -Robot.gyro.getGyroPIDOutput()+speed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
