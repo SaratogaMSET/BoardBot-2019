@@ -84,10 +84,9 @@ public class Drivetrain extends Subsystem{
         if(rightValue == 0 && leftValue != 0){
 
             final double gyroVal = stayAt;
-            final double turnAngle = 0;
             final double timeoutSec = 10;
             final double speed = leftValue;
-            gyroPID = new GyroPIDCommand(gyroVal + turnAngle, timeoutSec, speed);
+            gyroPID = new GyroPIDCommand(-(gyro.getYaw()-gyroVal), timeoutSec, speed);
             gyroPID.start();
             // if(veerVal < stayAt-0.2){
             //     gainL = -veerVal/K*D;
