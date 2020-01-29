@@ -83,7 +83,7 @@ public class GyroPIDCommand extends Command {
      SmartDashboard.putNumber("Gyro PID ERROR", pidController.getError());
      SmartDashboard.putBoolean("Gyro PID ONTARGET", pidController.onTarget());
      SmartDashboard.putNumber("Gyro PID OUTPUT", Robot.gyro.gyroPIDOutput);
-    Robot.drivetrain.rawDrive(Robot.gyro.getGyroPIDOutput()+speed, -Robot.gyro.getGyroPIDOutput()+speed);
+    Robot.drivetrain.rawDrive(Robot.gyro.getGyroPIDOutput()+speed/2, -Robot.gyro.getGyroPIDOutput()+speed/2);
   }
 
   // Make this return true when this Command no longer needs to run execute()

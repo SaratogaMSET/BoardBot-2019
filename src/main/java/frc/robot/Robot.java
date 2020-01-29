@@ -38,6 +38,7 @@ public class Robot extends TimedRobot {
   public static Turn90Test turnTest;
   public static Drivetrain drivetrain;
   public static GyroSubsystem gyro;
+  public static Encoders encoders;
 
   @Override
   public void robotInit() {
@@ -49,11 +50,15 @@ public class Robot extends TimedRobot {
     drivetrain = new Drivetrain();
     gyro = new GyroSubsystem();
     turnTest = new Turn90Test();
+    encoders = new Encoders();
   }
 
   @Override
   public void robotPeriodic() {
-    
+    SmartDashboard.putNumber("Left Absolute", encoders.getLeftAbsolute());
+    SmartDashboard.putNumber("Left Angle", encoders.getLeftAngle());
+    SmartDashboard.putNumber("Left Relative", encoders.getLeftRelative());
+    SmartDashboard.putNumber("Left Rotations", encoders.getLeftRotations());
   }
 
   @Override
